@@ -4,13 +4,13 @@ use yew::{
     Html, 
     html
 };
-pub struct Header;
+pub struct Content;
 
-pub enum HeaderMsg {
+pub enum ContentMsg {
 }
 
-impl Component for Header {
-    type Message = HeaderMsg;
+impl Component for Content {
+    type Message = ContentMsg;
     type Properties = ();
 
     fn create(_ctx: &Context<Self>) -> Self {
@@ -19,7 +19,7 @@ impl Component for Header {
 
     fn view(&self, _ctx: &Context<Self>) -> Html {
         html! {
-            <div class="text-xl font-semibold whitespace-nowrap dark:text-white">{"SmartNote"}</div>
+            <div class="text-xl whitespace-nowrap dark:text-white">{"Content"}</div>
         }
     }
 }
