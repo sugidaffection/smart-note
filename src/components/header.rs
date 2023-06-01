@@ -2,11 +2,17 @@ use yew::{
     Component,
     Context,
     Html, 
-    html
+    html, Callback, use_state
 };
-pub struct Header;
+
+use super::search::SearchInput;
+
+pub struct Header {
+    is_search: bool
+}
 
 pub enum HeaderMsg {
+    OnSearch(bool)
 }
 
 impl Component for Header {
@@ -14,12 +20,31 @@ impl Component for Header {
     type Properties = ();
 
     fn create(_ctx: &Context<Self>) -> Self {
-        Self
+        Self {
+            is_search: false
+        }
     }
 
-    fn view(&self, _ctx: &Context<Self>) -> Html {
+    fn view(&self, ctx: &Context<Self>) -> Html {
+        let on_search = ctx.link().callback(|value| {
+            HeaderMsg::OnSearch(value)
+        });
         html! {
-            <div class="text-xl font-semibold whitespace-nowrap dark:text-white">{"SmartNote"}</div>
+            <div class="flex items-center dark:text-white gap-2">
+                if !self.is_search {
+                    <div class="text-xl font-semibold whitespace-nowrap dark:text-white flex-grow">{"SmartNote"}</div>
+                }
+                <SearchInput {on_search} is_search={self.is_search} />
+            </div>
+        }
+    }
+
+    fn update(&mut self, ctx: &Context<Self>, msg: Self::Message) -> bool {
+        match msg {
+            HeaderMsg::OnSearch(value) => {
+                self.is_search = value;
+                true
+            }
         }
     }
 }
