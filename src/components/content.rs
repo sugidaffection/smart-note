@@ -1,10 +1,15 @@
-use web_sys::HtmlTextAreaElement;
+use wasm_bindgen::__rt::IntoJsResult;
+use gloo_utils::format::{JsValueSerdeExt};
+use wasm_bindgen::{JsValue};
+use web_sys::{window, HtmlElement};
 use yew::{
     Component,
     Context,
     Html, 
     html, NodeRef
 };
+
+use crate::{Quill, Options};
 
 use super::icon::Icon;
 pub struct Content {
@@ -124,13 +129,11 @@ impl Component for Content {
         }
     }
 
-    fn update(&mut self, ctx: &Context<Self>, msg: Self::Message) -> bool {
-        match msg {
-            ContentMsg::Bold => {
-                if let Some(textarea) = self.textarea.cast::<HtmlTextAreaElement>() {
-                }
-                true
-            }
-        }
+    fn rendered(&mut self, _ctx: &Context<Self>, _first_render: bool) {
+        let window = window().unwrap();
+        let document = window.document().unwrap();
+        let container = document.get_element_by_id("editor").unwrap();
+        let options = Options { theme: "snow".into() };
+        Quill::new(HtmlElement::from(container.into_js_result().unwrap()), JsValue::from_serde(&options).unwrap());
     }
 }
