@@ -1,7 +1,6 @@
-use wasm_bindgen::__rt::IntoJsResult;
 use gloo_utils::format::{JsValueSerdeExt};
 use wasm_bindgen::{JsValue};
-use web_sys::{window, HtmlElement};
+use web_sys::{HtmlElement};
 use yew::{
     Component,
     Context,
@@ -130,10 +129,8 @@ impl Component for Content {
     }
 
     fn rendered(&mut self, _ctx: &Context<Self>, _first_render: bool) {
-        let window = window().unwrap();
-        let document = window.document().unwrap();
-        let container = document.get_element_by_id("editor").unwrap();
+        let container = self.textarea.cast::<HtmlElement>().unwrap();
         let options = Options { theme: "snow".into() };
-        Quill::new(HtmlElement::from(container.into_js_result().unwrap()), JsValue::from_serde(&options).unwrap());
+        Quill::new(container, JsValue::from_serde(&options).unwrap());
     }
 }
