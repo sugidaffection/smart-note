@@ -1,13 +1,11 @@
-use yew::{Component, Context, Html, html, Children, Properties};
+use yew::{html, virtual_dom::VNode, Children, Component, Context, Html, Properties};
+
+use crate::components::{content::Content, header::Header, sidebar::Sidebar};
 
 pub struct Layout;
 
 #[derive(Properties, PartialEq)]
-pub struct LayoutProps {
-    pub header: Children,
-    pub sidebar: Children,
-    pub main: Children,
-}
+pub struct LayoutProps {}
 
 impl Component for Layout {
     type Message = ();
@@ -19,18 +17,17 @@ impl Component for Layout {
 
     fn view(&self, ctx: &Context<Self>) -> Html {
         html! {
-            <div class="layout">
+        <div class="layout">
                 <div class="header">
-                    { ctx.props().header.clone() }
+                    <Header />
                 </div>
                 <div class="sidebar">
-                    { ctx.props().sidebar.clone() }
+                    <Sidebar />
                 </div>
                 <div class="main">
-                    { ctx.props().main.clone() }
+                    <Content />
                 </div>
             </div>
-            
         }
     }
 }

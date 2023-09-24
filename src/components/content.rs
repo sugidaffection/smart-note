@@ -1,22 +1,17 @@
-use gloo_utils::format::{JsValueSerdeExt};
-use wasm_bindgen::{JsValue};
-use web_sys::{HtmlElement};
-use yew::{
-    Component,
-    Context,
-    Html, 
-    html, NodeRef
-};
+use gloo_utils::format::JsValueSerdeExt;
+use wasm_bindgen::JsValue;
+use web_sys::HtmlElement;
+use yew::{html, Component, Context, Html, NodeRef};
 
-use crate::{Quill, Options};
+use crate::{Options, Quill};
 
 use super::icon::Icon;
 pub struct Content {
-    textarea: NodeRef
+    textarea: NodeRef,
 }
 
 pub enum ContentMsg {
-    Bold
+    Bold,
 }
 
 impl Component for Content {
@@ -25,7 +20,7 @@ impl Component for Content {
 
     fn create(_ctx: &Context<Self>) -> Self {
         Self {
-            textarea: NodeRef::default()
+            textarea: NodeRef::default(),
         }
     }
 
@@ -121,7 +116,7 @@ impl Component for Content {
                         </button>
                     </div>
                 </div>
-                <div class="p-8 h-full dark:bg-gray-800 overflow-hidden">
+                <div class="p-8 h-full overflow-hidden">
                     <div ref={self.textarea.clone()}  id="editor"></div>
                 </div>
             </div>
@@ -130,7 +125,9 @@ impl Component for Content {
 
     fn rendered(&mut self, _ctx: &Context<Self>, _first_render: bool) {
         let container = self.textarea.cast::<HtmlElement>().unwrap();
-        let options = Options { theme: "snow".into() };
+        let options = Options {
+            theme: "snow".into(),
+        };
         Quill::new(container, JsValue::from_serde(&options).unwrap());
     }
 }

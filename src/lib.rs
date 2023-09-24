@@ -1,13 +1,13 @@
-use yew::prelude::*;
+use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
-use web_sys::{HtmlElement};
-use serde::{Serialize, Deserialize};
+use web_sys::HtmlElement;
+use yew::prelude::*;
 
 pub mod components;
-use components::header::Header;
-use components::sidebar::Sidebar;
 use components::content::Content;
+use components::header::Header;
 use components::layout::Layout;
+use components::sidebar::Sidebar;
 
 #[wasm_bindgen]
 extern "C" {
@@ -20,9 +20,8 @@ extern "C" {
 
 #[derive(Serialize, Deserialize)]
 pub struct Options {
-    pub theme: String
+    pub theme: String,
 }
-
 
 #[wasm_bindgen]
 extern "C" {
@@ -35,22 +34,9 @@ extern "C" {
     fn new(container: HtmlElement, options: JsValue) -> Quill;
 }
 
-
 #[function_component]
 pub fn App() -> Html {
     html! {
-        <Layout
-            header={
-                html!{ <Header /> }
-            }
-
-            sidebar={
-                html!{ <Sidebar /> }
-            }
-
-            main={
-                html!{ <Content /> }
-            }
-        />
+        <Layout />
     }
 }

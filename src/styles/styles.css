@@ -3,66 +3,78 @@
 @tailwind utilities;
 
 @layer base {
-    * {
-        scrollbar-width: 100px;
-        scrollbar-color: theme('colors.gray.600') theme('colors.gray.900');
-    }
-    
-    *::-webkit-scrollbar {
-        width: 15px;
-    }
-    
-    *::-webkit-scrollbar-track {
-        background: theme('colors.gray.900');
-        border-radius: 5px;
-    }
-    
-    *::-webkit-scrollbar-thumb {
-        background-color: theme('colors.gray.600');
-        border-radius: 14px;
-        border: 3px solid theme('colors.gray.900');
-    }
+  * {
+    scrollbar-width: 100px;
+    scrollbar-color: theme("colors.gray.600") theme("colors.gray.900");
+  }
+
+  *::-webkit-scrollbar {
+    width: 15px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: theme("colors.gray.900");
+    border-radius: 5px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: theme("colors.gray.600");
+    border-radius: 14px;
+    border: 3px solid theme("colors.gray.900");
+  }
 }
 
 .layout {
-    @apply fixed w-full h-full grid items-start;
-    grid-template-rows: auto 1fr;
-    grid-template-columns: auto 1fr;
+  @apply fixed w-full h-full grid items-start;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: auto 1fr;
 }
 
 .header {
-    @apply row-start-1 max-h-16 border-b border-gray-700 dark:bg-gray-800 p-2 px-3;
+  @apply row-start-1 col-span-2 max-h-16 border-b border-gray-700 dark:bg-gray-900 p-2 px-3;
 }
 
 .sidebar {
-    @apply flex flex-col gap-2 row-start-2 h-full py-4 overflow-y-auto bg-gray-100 dark:bg-gray-800 w-72;
+  @apply row-start-2 bg-gray-100 dark:bg-gray-900 w-72 h-full flex flex-col gap-2 overflow-hidden py-2;
 }
 
 .main {
-    @apply row-start-1 row-span-2 h-full w-full overflow-auto bg-gray-50 dark:bg-gray-800;
+  @apply row-start-2 row-span-2 h-full w-full overflow-auto bg-gray-50 dark:bg-gray-800;
 }
 
 .btn {
-    @apply p-4 dark:active:bg-gray-700 rounded;
+  @apply p-4 dark:active:bg-gray-700 rounded;
 }
 
 .btn-outline {
-    @apply border text-white border-white;
+  @apply border text-white border-white;
 }
 
 .btn-outline-dash {
-    @apply border text-white border-white border-dashed;
+  @apply border text-white border-white border-dashed;
+}
+
+.search-input {
+  @apply m-2;
+}
+
+.list {
+  @apply overflow-auto row-start-2 flex-grow h-full;
+}
+
+.search {
+  @apply w-full rounded p-1 outline-none;
 }
 
 .ql-toolbar {
-  border-top-left-radius: theme('borderRadius.md');
-  border-top-right-radius: theme('borderRadius.md');
+  border-top-left-radius: theme("borderRadius.md");
+  border-top-right-radius: theme("borderRadius.md");
 }
 
 #editor {
-  border-bottom-left-radius: theme('borderRadius.md');
-  border-bottom-right-radius: theme('borderRadius.md');
-  color: theme('colors.white');
+  border-bottom-left-radius: theme("borderRadius.md");
+  border-bottom-right-radius: theme("borderRadius.md");
+  color: theme("colors.white");
   height: 80%;
   /* added these styles */
   flex: 1;
@@ -72,15 +84,15 @@
 
 .ql-stroke,
 .ql-picker-label {
-  color: theme('colors.white') !important;
-  stroke: theme('colors.white') !important;
+  color: theme("colors.white") !important;
+  stroke: theme("colors.white") !important;
 }
 
 .ql-fill {
-  fill: theme('colors.white') !important;
+  fill: theme("colors.white") !important;
 }
 
 .ql-picker-options {
-  background: theme('colors.gray.900') !important;
-  color: theme('colors.white') !important;
+  background: theme("colors.gray.900") !important;
+  color: theme("colors.white") !important;
 }
